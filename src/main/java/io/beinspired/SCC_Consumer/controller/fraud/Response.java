@@ -1,4 +1,4 @@
-package io.beinspired.SCC_Consumer.controller;
+package io.beinspired.SCC_Consumer.controller.fraud;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

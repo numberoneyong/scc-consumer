@@ -1,4 +1,4 @@
-package io.beinspired.SCC_Consumer.controller;
+package io.beinspired.SCC_Consumer.controller.fraud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

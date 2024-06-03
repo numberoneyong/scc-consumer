@@ -1,6 +1,10 @@
-package io.beinspired.SCC_Consumer.controller;
+package io.beinspired.SCC_Consumer.controller.fraud;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.beinspired.SCC_Consumer.controller.fraud.FraudCheckStatus;
+import io.beinspired.SCC_Consumer.controller.fraud.FraudController;
+import io.beinspired.SCC_Consumer.controller.fraud.LoanRequest;
+import io.beinspired.SCC_Consumer.controller.fraud.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FraudControllerTest {
 
     @Autowired MockMvc mockMvc;
-    @Autowired FraudController fraudController;
+    @Autowired
+    FraudController fraudController;
     @StubRunnerPort("SCC-Producer")
     int producerPort;
 
@@ -42,17 +47,18 @@ class FraudControllerTest {
                 .content(new ObjectMapper().writeValueAsString(LoanRequest.sampleFraud()))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.fraudCheckStatus").value(FraudCheckStatus.FRAUD))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.rejection.reason").value("Amount too high"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.fraudCheckStatus").value(FraudCheckStatus.FRAUD.name()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.reason").value("Amount too high"));
     }
 
     @Test
-    public void should_eventually_get_fraud2() throws Exception {
+    public void should_eventually_get_fraud_through_controller() throws Exception {
         // given
         LoanRequest loanRequest = LoanRequest.sampleFraud();
         // when
         Response response = fraudController.fraudCheck(loanRequest);
         // then
         Assertions.assertThat(response.getFraudCheckStatus()).isEqualTo(FraudCheckStatus.FRAUD);
+        Assertions.assertThat(response.getReason()).isEqualTo("Amount too high");
     }
 }

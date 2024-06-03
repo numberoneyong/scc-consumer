@@ -39,8 +39,7 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-testlogger {
-	theme 'standard'
+	testlogger {
+		theme 'standard'
+	}
 }
