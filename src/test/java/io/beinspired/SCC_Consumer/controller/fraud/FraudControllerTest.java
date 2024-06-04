@@ -1,10 +1,6 @@
 package io.beinspired.SCC_Consumer.controller.fraud;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.beinspired.SCC_Consumer.controller.fraud.FraudCheckStatus;
-import io.beinspired.SCC_Consumer.controller.fraud.FraudController;
-import io.beinspired.SCC_Consumer.controller.fraud.LoanRequest;
-import io.beinspired.SCC_Consumer.controller.fraud.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
